@@ -12,6 +12,8 @@ new SqlConnection(config.GetConnectionString("SQL")));
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IProductCategory, ProductCategoryService>();
+builder.Services.AddScoped<IProduct, ProductService>();
+builder.Services.AddScoped<IOrder, OrderService>();
 
 var app = builder.Build();
 
