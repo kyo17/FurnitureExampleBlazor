@@ -9,5 +9,7 @@ namespace Interfaces
     public interface IOrder
     {
         Task<bool> createOrder(Order order);
+        Task<int> getNextOrderNum();
+        Task<int> getNextId();
     }
 }

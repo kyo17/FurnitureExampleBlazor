@@ -21,10 +21,11 @@ namespace Repository
         public async Task<bool> createOrder(Order order)
         {
             var Ok = false;
-            var query = 
+            var query =
             @"INSERT INTO Orders (OrderNumber, ClientId, OrderDate, DeliveryDate, Total)
               VALUES (@OrderNumber, @ClientId, @OrderDate, @DeliveryDate, @Total)";
-            var result = await db.ExecuteAsync(query, new {
+            var result = await db.ExecuteAsync(query, new
+            {
                 order.OrderNumber,
                 order.ClientId,
                 order.OrderDate,
@@ -36,6 +37,19 @@ namespace Repository
                 Ok = true;
             }
             return Ok;
+        }
+
+        public async Task<int> getNextId()
+        {
+            var query = @"SELECT IDENT_CURRENT('Orders') + 1";
+            return await db.QueryFirstAsync<int>(query, new { });
+        }
+
+        public async Task<int> getNextOrderNum()
+        {
+            var query = @"SELECT MAX(OrderNumber) + 1
+                        FROM Orders";
+            return await db.QueryFirstAsync<int>(query, new { });
         }
     }
 }
