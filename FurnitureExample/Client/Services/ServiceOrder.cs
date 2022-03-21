@@ -31,5 +31,15 @@ namespace Client.Services
             }
             return ok;
         }
+
+        public Task<int> getNextId()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> getNextOrderNum()
+        {
+            return await http.GetFromJsonAsync<int>($"{apiUrl}/getnextvalue");
+        }
     }
 }
